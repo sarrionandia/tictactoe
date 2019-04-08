@@ -2,6 +2,6 @@ namespace TicTacToe
 {
     public interface IPersistence
     {
-        
+        bool IsThereAnXInPosition(int i);
     }
 }

@@ -4,21 +4,47 @@ namespace TicTacToe
 {
     public class ViewGrid
     {
-        public ViewGrid(IPersistence newGameTest)
+        private readonly IPersistence _persistence;
+
+        public ViewGrid(IPersistence persistence)
         {
+            _persistence = persistence;
         }
 
         public ViewGridResponse Execute()
         {
-            return new ViewGridResponse
+            if (_persistence.IsThereAnXInPosition(4))
             {
-                Grid = new[]
+                return new ViewGridResponse
                 {
-                    Blank, Blank, Blank,
-                    Blank, Blank, Blank,
-                    Blank, Blank, Blank
+                    Grid = new[]
+                    {
+                        Blank, Blank, Blank,
+                        Blank, X, Blank,
+                        Blank, Blank, Blank
+                    }
+                };
+            }
+            
+            return _persistence.IsThereAnXInPosition(0)
+                ? new ViewGridResponse
+                {
+                    Grid = new[]
+                    {
+                        X, Blank, Blank,
+                        Blank, Blank, Blank,
+                        Blank, Blank, Blank
+                    }
                 }
-            };
+                : new ViewGridResponse
+                {
+                    Grid = new[]
+                    {
+                        Blank, Blank, Blank,
+                        Blank, Blank, Blank,
+                        Blank, Blank, Blank
+                    }
+                };
         }
     }
 }
