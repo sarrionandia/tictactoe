@@ -22,17 +22,68 @@ namespace TicTacToe.Test
         }
 
         [Test]
-        public void CanViewAGridWithPiecePlacedInTopLeftCorner()
+        [TestCase(0, new []
         {
-            _positionOfX = 0;
+            X,Blank,Blank,
+            Blank,Blank,Blank,
+            Blank,Blank,Blank
+        })]
+        [TestCase(1, new []
+        {
+            Blank,X,Blank,
+            Blank,Blank,Blank,
+            Blank,Blank,Blank
+        })]
+        [TestCase(2, new []
+        {
+            Blank,Blank, X,
+            Blank,Blank,Blank,
+            Blank,Blank,Blank
+        })]
+        [TestCase(3, new []
+        {
+            Blank,Blank,Blank,
+            X,Blank,Blank,
+            Blank,Blank,Blank
+        })]
+        [TestCase(4, new []
+        {
+            Blank,Blank,Blank,
+            Blank,X,Blank,
+            Blank,Blank,Blank
+        })]
+        [TestCase(5, new []
+        {
+            Blank,Blank,Blank,
+            Blank,Blank,X,
+            Blank,Blank,Blank
+        })]
+        [TestCase(6, new []
+        {
+            Blank,Blank,Blank,
+            Blank,Blank,Blank,
+            X,Blank,Blank
+        })]
+        [TestCase(7, new []
+        {
+            Blank,Blank,Blank,
+            Blank,Blank,Blank,
+            Blank,X,Blank
+        })]
+        [TestCase(8, new []
+        {
+            Blank,Blank,Blank,
+            Blank,Blank,Blank,
+            Blank,Blank,X
+        })]
+        public void CanViewAGridWithPiecePlacedInTopLeftCorner(
+            int position, ViewGridResponse.CellValue[] expectedGrid
+        )
+        {
+            _positionOfX = position;
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
-            Assert.AreEqual(new []
-            {
-                X,Blank,Blank,
-                Blank,Blank,Blank,
-                Blank,Blank,Blank
-            }, viewGridResponse.Grid);
+            Assert.AreEqual(expectedGrid, viewGridResponse.Grid);
         }
         
         [Test]
