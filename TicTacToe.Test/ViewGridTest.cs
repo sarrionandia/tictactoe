@@ -48,8 +48,21 @@ namespace TicTacToe.Test
                 Blank,Blank,Blank
             }, viewGridResponse.Grid);
         }
-
-
+        
+        [Test]
+        public void CanViewAGridWithOnePiecePlacedSomewhereInMiddleOfGrid2()
+        {
+            _positionOfX = 8;
+            var viewGrid = new ViewGrid(this);
+            var viewGridResponse = viewGrid.Execute();
+            Assert.AreEqual(new []
+            {
+                Blank,Blank,Blank,
+                Blank,Blank,Blank,
+                Blank,Blank,X
+            }, viewGridResponse.Grid);
+        }
+        
         public bool IsThereAnXInPosition(int i)
         {
             return _positionOfX == i;

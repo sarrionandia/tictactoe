@@ -13,38 +13,21 @@ namespace TicTacToe
 
         public ViewGridResponse Execute()
         {
-            if (_persistence.IsThereAnXInPosition(4))
+            var cellValues = new[]
             {
-                return new ViewGridResponse
-                {
-                    Grid = new[]
-                    {
-                        Blank, Blank, Blank,
-                        Blank, X, Blank,
-                        Blank, Blank, Blank
-                    }
-                };
-            }
+                Blank, Blank, Blank,
+                Blank, Blank, Blank,
+                Blank, Blank, Blank
+            };
             
-            return _persistence.IsThereAnXInPosition(0)
-                ? new ViewGridResponse
-                {
-                    Grid = new[]
-                    {
-                        X, Blank, Blank,
-                        Blank, Blank, Blank,
-                        Blank, Blank, Blank
-                    }
-                }
-                : new ViewGridResponse
-                {
-                    Grid = new[]
-                    {
-                        Blank, Blank, Blank,
-                        Blank, Blank, Blank,
-                        Blank, Blank, Blank
-                    }
-                };
+            if (_persistence.IsThereAnXInPosition(4)) cellValues[4] = X;
+            if (_persistence.IsThereAnXInPosition(0)) cellValues[0] = X;
+            if (_persistence.IsThereAnXInPosition(8)) cellValues[8] = X;
+            
+            return new ViewGridResponse
+            {
+                Grid = cellValues
+            };
         }
     }
 }
