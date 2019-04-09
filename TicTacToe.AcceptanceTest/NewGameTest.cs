@@ -5,12 +5,28 @@ namespace TicTacToe.AcceptanceTest
 {
     public class NewGameTest : IPersistence
     {
-        private int? _positionOfSavedX;
+        private Grid _grid;
+
+        public Grid Read()
+        {
+            return _grid;
+        }
+
+        public void Save(Grid grid)
+        {
+            _grid = grid;
+        }
+        
+        [SetUp]
+        public void SetUp()
+        {
+            _grid = new Grid();
+
+        }
 
         [Test]
         public void PlayerSeesEmptyGridAtBeginningOfTheGame()
         {
-            _positionOfSavedX = null;
             var viewGrid = new ViewGrid(this);
             ViewGridResponse viewGridResponse = viewGrid.Execute();
             
@@ -25,7 +41,6 @@ namespace TicTacToe.AcceptanceTest
         [Test]
         public void PlayerXSeesTheirPieceOnTheGridAfterPlacingIt()
         {
-            _positionOfSavedX = null;
             var placePiece = new PlacePiece(this);
             placePiece.Execute(new PlacePieceRequest { Position = 4 });
             
@@ -45,7 +60,6 @@ namespace TicTacToe.AcceptanceTest
         [Ignore("WIP")]
         public void PlayerOCanNotGoFirst()
         {
-            _positionOfSavedX = null;
             var placePiece = new PlacePiece(this);
             placePiece.Execute(new PlacePieceRequest { Position = 4, Piece = O });
             
@@ -58,16 +72,6 @@ namespace TicTacToe.AcceptanceTest
                 Blank, Blank, Blank,
                 Blank, Blank, Blank
             }, viewGridResponse.Grid);
-        }
-
-        public Grid Read()
-        {
-            return new Grid() { PositionOfX = _positionOfSavedX};
-        }
-
-        public void Save(Grid grid)
-        {
-            _positionOfSavedX = grid.PositionOfX;
         }
     }
 }
