@@ -1,8 +1,9 @@
 using System.Collections.Immutable;
 using System.Linq;
 using NUnit.Framework;
-using static TicTacToe.ViewGridResponse;
-using static TicTacToe.ViewGridResponse.CellValue;
+using TicTacToe.Boundary;
+using static TicTacToe.Boundary.ViewGridResponse;
+using static TicTacToe.Boundary.CellValue;
 
 namespace TicTacToe.Test
 {

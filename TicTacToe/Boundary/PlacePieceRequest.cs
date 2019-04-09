@@ -1,8 +1,8 @@
-namespace TicTacToe
+namespace TicTacToe.Boundary
 {
     public class PlacePieceRequest
     {
         public int Position { get; set; }
-        public ViewGridResponse.CellValue Piece { get; set; }
+        public CellValue Piece { get; set; }
     }
 }

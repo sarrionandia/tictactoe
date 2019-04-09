@@ -1,5 +1,6 @@
 using NUnit.Framework;
-using static TicTacToe.ViewGridResponse.CellValue;
+using TicTacToe.Boundary;
+using static TicTacToe.Boundary.CellValue;
 
 namespace TicTacToe.AcceptanceTest
 {

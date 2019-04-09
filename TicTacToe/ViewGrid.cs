@@ -1,4 +1,5 @@
-using static TicTacToe.ViewGridResponse.CellValue;
+using TicTacToe.Boundary;
+using static TicTacToe.Boundary.CellValue;
 
 namespace TicTacToe
 {
@@ -30,7 +31,7 @@ namespace TicTacToe
             };
         }
 
-        private static ViewGridResponse.CellValue[] EmptyGrid() => new[]
+        private static CellValue[] EmptyGrid() => new[]
             {
                 Blank, Blank, Blank,
                 Blank, Blank, Blank,
