@@ -14,7 +14,6 @@ namespace TicTacToe
         public Grid Build()
         {
             return new Grid {PositionOfX = _xPosition, PositionOfO = _oPosition};
-
         }
 
         public GridBuilder WithXAt(int rPosition)
