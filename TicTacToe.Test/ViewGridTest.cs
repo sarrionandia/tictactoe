@@ -9,6 +9,23 @@ namespace TicTacToe.Test
     {
         private int? _positionOfX;
 
+        public bool IsThereAnXInPosition(int i)
+        {
+            return _positionOfX == i;
+        }
+
+        public bool IsXOnlyInPosition(int position, ViewGridResponse.CellValue[] grid)
+        {
+            bool xIsInPosition = grid[position] == X;
+
+            var onlyTheBlanks = grid
+                .Where(value => value == Blank)
+                .ToImmutableList();
+            bool everythingElseIsBlank = onlyTheBlanks.Count == 8;
+
+            return xIsInPosition && everythingElseIsBlank;
+        }
+
         [Test]
         public void CanViewEmptyGrid()
         {
@@ -33,31 +50,12 @@ namespace TicTacToe.Test
         [TestCase(6)]
         [TestCase(7)]
         [TestCase(8)]
-        public void CanViewAGridWithPiecePlacedAnywhere(
-            int position
-        )
+        public void CanViewAGridWithPiecePlacedAnywhere(int position)
         {
             _positionOfX = position;
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
             Assert.IsTrue(IsXOnlyInPosition(position, viewGridResponse.Grid));
-        }
-
-        public bool IsThereAnXInPosition(int i)
-        {
-            return _positionOfX == i;
-        }
-
-        public bool IsXOnlyInPosition(int position, ViewGridResponse.CellValue[] grid)
-        {
-            bool xIsInPosition = grid[position] == X;
-            
-            var onlyTheBlanks = grid
-                .Where(value => value == Blank)
-                .ToImmutableList();
-            bool everythingElseIsBlank = onlyTheBlanks.Count == 8;
-
-            return xIsInPosition && everythingElseIsBlank;
         }
     }
 }
