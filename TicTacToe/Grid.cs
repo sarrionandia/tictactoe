@@ -14,7 +14,7 @@ namespace TicTacToe
 
         public Object WhoMovedLast()
         {
-            return null;
+            return PositionOfX;
         }
 
         public bool IsThereAnOInPosition(int position)

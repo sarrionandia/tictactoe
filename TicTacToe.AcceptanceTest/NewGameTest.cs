@@ -42,7 +42,7 @@ namespace TicTacToe.AcceptanceTest
         public void PlayerXSeesTheirPieceOnTheGridAfterPlacingIt()
         {
             var placePiece = new PlacePiece(this);
-            placePiece.Execute(new PlacePieceRequest {Position = 4});
+            placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = X});
 
             var viewGrid = new ViewGrid(this);
             ViewGridResponse viewGridResponse = viewGrid.Execute();
