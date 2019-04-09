@@ -5,6 +5,7 @@ namespace TicTacToe
     public class Grid
     {
         public int? PositionOfX { get; set; }
+        public int? PositionOfO { get; set; }
 
         public bool IsThereAnXInPosition(int position)
         {
@@ -14,6 +15,11 @@ namespace TicTacToe
         public Object WhoMovedLast()
         {
             return null;
+        }
+
+        public bool IsThereAnOInPosition(int position)
+        {
+            return PositionOfO == position;
         }
     }
 }

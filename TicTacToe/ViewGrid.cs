@@ -23,6 +23,11 @@ namespace TicTacToe
                 {
                     cellValues[i] = X;
                 }
+                if (grid.IsThereAnOInPosition(i))
+                {
+                    cellValues[i] = O;
+                }
+
             }
 
             return new ViewGridResponse

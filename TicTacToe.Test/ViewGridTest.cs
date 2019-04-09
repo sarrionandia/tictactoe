@@ -10,10 +10,11 @@ namespace TicTacToe.Test
     public class ViewGridTest : IGridReader
     {
         private int? _positionOfX;
+        private int? _positionOfO;
 
         public Grid Read()
         {
-            return new Grid {PositionOfX = _positionOfX};
+            return new Grid {PositionOfX = _positionOfX, PositionOfO = _positionOfO};
         }
 
         private bool IsXOnlyInPosition(int position, CellValue[] grid)
@@ -32,6 +33,8 @@ namespace TicTacToe.Test
         public void CanViewEmptyGrid()
         {
             _positionOfX = null;
+            _positionOfO = null;
+            
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
             Assert.AreEqual(new[]
@@ -55,9 +58,26 @@ namespace TicTacToe.Test
         public void CanViewAGridWithPiecePlacedAnywhere(int position)
         {
             _positionOfX = position;
+            _positionOfO = null;
+
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
             Assert.IsTrue(IsXOnlyInPosition(position, viewGridResponse.Grid));
         }
+
+        [Test]
+        public void CanViewAGridWithAnOPiecePlacedInTheTopLeft()
+        {
+            _positionOfX = 7;
+            _positionOfO = 8;
+            
+            var viewGrid = new ViewGrid(this);
+            var viewGridResponse = viewGrid.Execute();
+            Assert.AreEqual(new[]
+            {
+                Blank, Blank, Blank,
+                Blank, Blank, Blank,
+                Blank, X, O
+            }, viewGridResponse.Grid);        }
     }
 }
