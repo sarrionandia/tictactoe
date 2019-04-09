@@ -33,7 +33,7 @@ namespace TicTacToe.Test
         [TestCase(6)]
         [TestCase(7)]
         [TestCase(8)]
-        public void CanViewAGridWithPiecePlacedInTopLeftCorner(
+        public void CanViewAGridWithPiecePlacedAnywhere(
             int position
         )
         {
@@ -41,34 +41,6 @@ namespace TicTacToe.Test
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
             Assert.IsTrue(IsXOnlyInPosition(position, viewGridResponse.Grid));
-        }
-
-        [Test]
-        public void CanViewAGridWithOnePiecePlacedSomewhereInMiddleOfGrid()
-        {
-            _positionOfX = 4;
-            var viewGrid = new ViewGrid(this);
-            var viewGridResponse = viewGrid.Execute();
-            Assert.AreEqual(new[]
-            {
-                Blank, Blank, Blank,
-                Blank, X, Blank,
-                Blank, Blank, Blank
-            }, viewGridResponse.Grid);
-        }
-
-        [Test]
-        public void CanViewAGridWithOnePiecePlacedSomewhereInMiddleOfGrid2()
-        {
-            _positionOfX = 8;
-            var viewGrid = new ViewGrid(this);
-            var viewGridResponse = viewGrid.Execute();
-            Assert.AreEqual(new[]
-            {
-                Blank, Blank, Blank,
-                Blank, Blank, Blank,
-                Blank, Blank, X
-            }, viewGridResponse.Grid);
         }
 
         public bool IsThereAnXInPosition(int i)
