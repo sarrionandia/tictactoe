@@ -13,12 +13,7 @@ namespace TicTacToe
 
         public ViewGridResponse Execute()
         {
-            var cellValues = new[]
-            {
-                Blank, Blank, Blank,
-                Blank, Blank, Blank,
-                Blank, Blank, Blank
-            };
+            var cellValues = EmptyGrid();
 
             for (int i = 0; i < cellValues.Length; i++)
             {
@@ -27,11 +22,18 @@ namespace TicTacToe
                     cellValues[i] = X;
                 }
             }
-            
+
             return new ViewGridResponse
             {
                 Grid = cellValues
             };
         }
+
+        private static ViewGridResponse.CellValue[] EmptyGrid() => new[]
+            {
+                Blank, Blank, Blank,
+                Blank, Blank, Blank,
+                Blank, Blank, Blank
+            };
     }
 }
