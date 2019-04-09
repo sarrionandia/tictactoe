@@ -84,5 +84,14 @@ namespace TicTacToe.Test
             PlacePiece(new PlacePieceRequest{Position = 3, Piece = O});
             Assert.IsNull(_positionOfSavedOPiece);
         }
+
+        [Test]
+        public void ShouldNotSaveGridIfOClashesWithExistingX()
+        {
+            _positionOfSavedXPiece = 2;
+            PlacePiece(new PlacePieceRequest{Position = 2, Piece = O});
+            Assert.IsNull(_positionOfSavedOPiece);
+            Assert.AreEqual(_positionOfSavedXPiece, 2);
+        }
     }
 }

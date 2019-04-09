@@ -87,5 +87,21 @@ namespace TicTacToe.AcceptanceTest
                 Blank, Blank, Blank
             }, viewGridResponse.Grid);
         }
+        
+        [Test]
+        public void PlayerOCantPlacePieceOnTopOfX()
+        {
+            _placePiece.Execute(new PlacePieceRequest {Position = 6, Piece = X});
+            _placePiece.Execute(new PlacePieceRequest {Position = 6, Piece = O});
+
+            ViewGridResponse viewGridResponse = _viewGrid.Execute();
+
+            Assert.AreEqual(new[]
+            {
+                Blank, Blank, Blank,
+                Blank, Blank, Blank,
+                X, Blank, Blank
+            }, viewGridResponse.Grid);
+        }
     }
 }
