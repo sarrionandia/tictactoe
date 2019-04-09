@@ -19,13 +19,14 @@ namespace TicTacToe
 
             if (r.Piece == O && NobodyHasYetMoved()) return;
 
-            var grid = _persistence.Read();
-            
-            _persistence.Save(
-                r.Piece == X 
-                    ? new Grid {PositionOfX = r.Position, PositionOfO = grid.PositionOfO} 
-                    : new Grid {PositionOfO = r.Position, PositionOfX = grid.PositionOfX}
-            );
+            var builder = new GridBuilder(_persistence.Read());
+
+            if (r.Piece == X)
+                builder.WithXAt(r.Position);
+            else
+                builder.WithOAt(r.Position);
+
+            _persistence.Save(builder.Build());
         }
 
         private bool NobodyHasYetMoved()
