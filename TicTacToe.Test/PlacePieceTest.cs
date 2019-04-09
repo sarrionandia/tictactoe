@@ -45,6 +45,11 @@ namespace TicTacToe.Test
             throw new System.NotImplementedException();
         }
 
+        public Grid Read()
+        {
+            return new Grid {PositionOfX = _positionOfSavedPiece};
+        }
+
         public void Save(Grid grid)
         {
             _positionOfSavedPiece = grid.PositionOfX;

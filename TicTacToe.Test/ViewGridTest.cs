@@ -15,6 +15,11 @@ namespace TicTacToe.Test
             return _positionOfX == i;
         }
 
+        public Grid Read()
+        {
+            return new Grid {PositionOfX = _positionOfX};
+        }
+
         public void Save(Grid grid)
         {
             throw new System.NotImplementedException();

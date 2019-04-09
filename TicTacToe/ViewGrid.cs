@@ -14,10 +14,11 @@ namespace TicTacToe
         public ViewGridResponse Execute()
         {
             var cellValues = EmptyGrid();
-
+            var grid = _persistence.Read();
+            
             for (int i = 0; i < cellValues.Length; i++)
             {
-                if (_persistence.IsThereAnXInPosition(i))
+                if (grid.PositionOfX == i)
                 {
                     cellValues[i] = X;
                 }

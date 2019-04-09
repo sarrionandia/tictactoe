@@ -4,6 +4,8 @@ namespace TicTacToe
     {
         bool IsThereAnXInPosition(int i);
 
+        Grid Read();
+
         void Save(Grid grid);
     }
 }

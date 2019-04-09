@@ -65,6 +65,11 @@ namespace TicTacToe.AcceptanceTest
             return _positionOfSavedX == i;
         }
 
+        public Grid Read()
+        {
+            return new Grid() { PositionOfX = _positionOfSavedX};
+        }
+
         public void Save(Grid grid)
         {
             _positionOfSavedX = grid.PositionOfX;
