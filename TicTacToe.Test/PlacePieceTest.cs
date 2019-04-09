@@ -11,7 +11,11 @@ namespace TicTacToe.Test
         
         public Grid Read()
         {
-            return new Grid {PositionOfX = _positionOfSavedXPiece};
+            return new Grid
+            {
+                PositionOfX = _positionOfSavedXPiece, 
+                PositionOfO = _positionOfSavedOPiece
+            };
         }
 
         public void Save(Grid grid)
@@ -63,6 +67,15 @@ namespace TicTacToe.Test
             _positionOfSavedXPiece = 1;
             PlacePiece(new PlacePieceRequest {Position = 0, Piece = O});
             Assert.AreEqual(0, _positionOfSavedOPiece);
+        }
+        
+        [Test]
+        public void PlacesOPieceInLastPositionOnSecondMove()
+        {
+            _positionOfSavedXPiece = 1;
+            PlacePiece(new PlacePieceRequest {Position = 8, Piece = O});
+            Assert.AreEqual(8, _positionOfSavedOPiece);
+            Assert.AreEqual(1, _positionOfSavedXPiece);
         }
 
         [Test]

@@ -74,7 +74,6 @@ namespace TicTacToe.AcceptanceTest
         }
 
         [Test]
-        [Ignore("WIP")]
         public void PlayerOCanGoSecond()
         {
             var placePiece = new PlacePiece(this);
