@@ -21,17 +21,25 @@ namespace TicTacToe
 
             var builder = new GridBuilder(_persistence.Read());
 
-            if (r.Piece == X)
-                builder.WithXAt(r.Position);
-            else
-                builder.WithOAt(r.Position);
-
-            _persistence.Save(builder.Build());
+            _persistence.Save(builder.UpdatedForRequest(r).Build());
         }
 
         private bool NobodyHasYetMoved()
         {
             return _persistence.Read().WhoMovedLast() == null;
+        }
+    }
+    
+    public static class GridBuilderExtensions
+    {
+        public static GridBuilder UpdatedForRequest(this GridBuilder builder, PlacePieceRequest r)
+        {
+            if (r.Piece == X)
+                builder.WithXAt(r.Position);
+            else
+                builder.WithOAt(r.Position);
+
+            return builder;
         }
     }
 }
