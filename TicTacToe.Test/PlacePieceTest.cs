@@ -39,11 +39,6 @@ namespace TicTacToe.Test
             
             Assert.AreEqual(position, _positionOfSavedPiece);
         }
-        
-        public bool IsThereAnXInPosition(int i)
-        {
-            throw new System.NotImplementedException();
-        }
 
         public Grid Read()
         {

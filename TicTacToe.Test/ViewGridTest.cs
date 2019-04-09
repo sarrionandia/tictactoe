@@ -10,11 +10,6 @@ namespace TicTacToe.Test
     {
         private int? _positionOfX;
 
-        public bool IsThereAnXInPosition(int i)
-        {
-            return _positionOfX == i;
-        }
-
         public Grid Read()
         {
             return new Grid {PositionOfX = _positionOfX};

@@ -60,11 +60,6 @@ namespace TicTacToe.AcceptanceTest
             }, viewGridResponse.Grid);
         }
 
-        public bool IsThereAnXInPosition(int i)
-        {
-            return _positionOfSavedX == i;
-        }
-
         public Grid Read()
         {
             return new Grid() { PositionOfX = _positionOfSavedX};
