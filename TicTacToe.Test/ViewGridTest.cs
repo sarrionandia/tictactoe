@@ -6,18 +6,13 @@ using static TicTacToe.ViewGridResponse.CellValue;
 
 namespace TicTacToe.Test
 {
-    public class ViewGridTest : IPersistence
+    public class ViewGridTest : IGridReader
     {
         private int? _positionOfX;
 
         public Grid Read()
         {
             return new Grid {PositionOfX = _positionOfX};
-        }
-
-        public void Save(Grid grid)
-        {
-            throw new System.NotImplementedException();
         }
 
         private bool IsXOnlyInPosition(int position, CellValue[] grid)

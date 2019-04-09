@@ -1,9 +1,7 @@
 namespace TicTacToe
 {
-    public interface IPersistence
+    public interface IPersistence : IGridReader
     {
-        Grid Read();
-
         void Save(Grid grid);
     }
 }

@@ -4,9 +4,9 @@ namespace TicTacToe
 {
     public class ViewGrid
     {
-        private readonly IPersistence _persistence;
+        private readonly IGridReader _persistence;
 
-        public ViewGrid(IPersistence persistence)
+        public ViewGrid(IGridReader persistence)
         {
             _persistence = persistence;
         }
