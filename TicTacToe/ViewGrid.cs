@@ -18,7 +18,7 @@ namespace TicTacToe
             
             for (int i = 0; i < cellValues.Length; i++)
             {
-                if (grid.PositionOfX == i)
+                if (grid.IsThereAnXInPosition(i))
                 {
                     cellValues[i] = X;
                 }
