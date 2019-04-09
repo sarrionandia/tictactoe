@@ -4,7 +4,7 @@ using static TicTacToe.Boundary.CellValue;
 
 namespace TicTacToe.AcceptanceTest
 {
-    public class NewGameTest : IPersistence
+    public class TicTacToeTest : IPersistence
     {
         private Grid _grid;
         private PlacePiece _placePiece;
