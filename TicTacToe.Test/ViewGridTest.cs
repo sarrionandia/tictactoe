@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+using System.Linq;
 using NUnit.Framework;
 using static TicTacToe.ViewGridResponse.CellValue;
 
@@ -13,110 +15,77 @@ namespace TicTacToe.Test
             _positionOfX = null;
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
-            Assert.AreEqual(new []
+            Assert.AreEqual(new[]
             {
-                Blank,Blank,Blank,
-                Blank,Blank,Blank,
-                Blank,Blank,Blank
+                Blank, Blank, Blank,
+                Blank, Blank, Blank,
+                Blank, Blank, Blank
             }, viewGridResponse.Grid);
         }
 
         [Test]
-        [TestCase(0, new []
-        {
-            X,Blank,Blank,
-            Blank,Blank,Blank,
-            Blank,Blank,Blank
-        })]
-        [TestCase(1, new []
-        {
-            Blank,X,Blank,
-            Blank,Blank,Blank,
-            Blank,Blank,Blank
-        })]
-        [TestCase(2, new []
-        {
-            Blank,Blank, X,
-            Blank,Blank,Blank,
-            Blank,Blank,Blank
-        })]
-        [TestCase(3, new []
-        {
-            Blank,Blank,Blank,
-            X,Blank,Blank,
-            Blank,Blank,Blank
-        })]
-        [TestCase(4, new []
-        {
-            Blank,Blank,Blank,
-            Blank,X,Blank,
-            Blank,Blank,Blank
-        })]
-        [TestCase(5, new []
-        {
-            Blank,Blank,Blank,
-            Blank,Blank,X,
-            Blank,Blank,Blank
-        })]
-        [TestCase(6, new []
-        {
-            Blank,Blank,Blank,
-            Blank,Blank,Blank,
-            X,Blank,Blank
-        })]
-        [TestCase(7, new []
-        {
-            Blank,Blank,Blank,
-            Blank,Blank,Blank,
-            Blank,X,Blank
-        })]
-        [TestCase(8, new []
-        {
-            Blank,Blank,Blank,
-            Blank,Blank,Blank,
-            Blank,Blank,X
-        })]
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        [TestCase(6)]
+        [TestCase(7)]
+        [TestCase(8)]
         public void CanViewAGridWithPiecePlacedInTopLeftCorner(
-            int position, ViewGridResponse.CellValue[] expectedGrid
+            int position
         )
         {
             _positionOfX = position;
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
-            Assert.AreEqual(expectedGrid, viewGridResponse.Grid);
+            Assert.IsTrue(IsXOnlyInPosition(position, viewGridResponse.Grid));
         }
-        
+
         [Test]
         public void CanViewAGridWithOnePiecePlacedSomewhereInMiddleOfGrid()
         {
             _positionOfX = 4;
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
-            Assert.AreEqual(new []
+            Assert.AreEqual(new[]
             {
-                Blank,Blank,Blank,
-                Blank,X,Blank,
-                Blank,Blank,Blank
+                Blank, Blank, Blank,
+                Blank, X, Blank,
+                Blank, Blank, Blank
             }, viewGridResponse.Grid);
         }
-        
+
         [Test]
         public void CanViewAGridWithOnePiecePlacedSomewhereInMiddleOfGrid2()
         {
             _positionOfX = 8;
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
-            Assert.AreEqual(new []
+            Assert.AreEqual(new[]
             {
-                Blank,Blank,Blank,
-                Blank,Blank,Blank,
-                Blank,Blank,X
+                Blank, Blank, Blank,
+                Blank, Blank, Blank,
+                Blank, Blank, X
             }, viewGridResponse.Grid);
         }
-        
+
         public bool IsThereAnXInPosition(int i)
         {
             return _positionOfX == i;
+        }
+
+        public bool IsXOnlyInPosition(int position, ViewGridResponse.CellValue[] grid)
+        {
+            bool xIsInPosition = grid[position] == X;
+            
+            var onlyTheBlanks = grid
+                .Where(value => value == Blank)
+                .ToImmutableList();
+            bool everythingElseIsBlank = onlyTheBlanks.Count == 8;
+
+            return xIsInPosition && everythingElseIsBlank;
         }
     }
 }
