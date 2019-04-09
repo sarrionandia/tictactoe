@@ -7,6 +7,8 @@ namespace TicTacToe.AcceptanceTest
     public class NewGameTest : IPersistence
     {
         private Grid _grid;
+        private PlacePiece _placePiece;
+        private ViewGrid _viewGrid;
 
         public Grid Read()
         {
@@ -21,14 +23,15 @@ namespace TicTacToe.AcceptanceTest
         [SetUp]
         public void SetUp()
         {
+            _placePiece = new PlacePiece(this);
+            _viewGrid = new ViewGrid(this);
             _grid = new Grid();
         }
 
         [Test]
         public void PlayerSeesEmptyGridAtBeginningOfTheGame()
         {
-            var viewGrid = new ViewGrid(this);
-            ViewGridResponse viewGridResponse = viewGrid.Execute();
+            ViewGridResponse viewGridResponse = _viewGrid.Execute();
 
             Assert.AreEqual(new[]
             {
@@ -41,11 +44,9 @@ namespace TicTacToe.AcceptanceTest
         [Test]
         public void PlayerXSeesTheirPieceOnTheGridAfterPlacingIt()
         {
-            var placePiece = new PlacePiece(this);
-            placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = X});
+            _placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = X});
 
-            var viewGrid = new ViewGrid(this);
-            ViewGridResponse viewGridResponse = viewGrid.Execute();
+            ViewGridResponse viewGridResponse = _viewGrid.Execute();
 
             Assert.AreEqual(new[]
             {
@@ -59,11 +60,9 @@ namespace TicTacToe.AcceptanceTest
         [Test]
         public void PlayerOCanNotGoFirst()
         {
-            var placePiece = new PlacePiece(this);
-            placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = O});
+            _placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = O});
 
-            var viewGrid = new ViewGrid(this);
-            ViewGridResponse viewGridResponse = viewGrid.Execute();
+            ViewGridResponse viewGridResponse = _viewGrid.Execute();
 
             Assert.AreEqual(new[]
             {
@@ -76,12 +75,10 @@ namespace TicTacToe.AcceptanceTest
         [Test]
         public void PlayerOCanGoSecond()
         {
-            var placePiece = new PlacePiece(this);
-            placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = X});
-            placePiece.Execute(new PlacePieceRequest {Position = 5, Piece = O});
+            _placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = X});
+            _placePiece.Execute(new PlacePieceRequest {Position = 5, Piece = O});
 
-            var viewGrid = new ViewGrid(this);
-            ViewGridResponse viewGridResponse = viewGrid.Execute();
+            ViewGridResponse viewGridResponse = _viewGrid.Execute();
 
             Assert.AreEqual(new[]
             {
