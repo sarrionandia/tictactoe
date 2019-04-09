@@ -20,6 +20,9 @@ namespace TicTacToe.Test
             _positionOfSavedOPiece = grid.PositionOfO;
         }
         
+        private void PlacePiece(PlacePieceRequest request) 
+            => new PlacePiece(this).Execute(request);
+        
         [SetUp]
         public void SetUp()
         {
@@ -30,8 +33,7 @@ namespace TicTacToe.Test
         [Test]
         public void DoesNotPlaceGivenNullRequest()
         {
-            var placePiece = new PlacePiece(this);
-            placePiece.Execute(null);
+            PlacePiece(null);
             
             Assert.IsNull(_positionOfSavedXPiece);
         }
@@ -49,8 +51,7 @@ namespace TicTacToe.Test
         [TestCase(9)]
         public void PlacesXPieceInAnyPosition(int position)
         {
-            var placePiece = new PlacePiece(this);
-            placePiece.Execute(new PlacePieceRequest() {Position = position, Piece = X});
+            PlacePiece(new PlacePieceRequest() {Position = position, Piece = X});
             
             Assert.AreEqual(position, _positionOfSavedXPiece);
             Assert.IsNull(_positionOfSavedOPiece);
@@ -60,16 +61,14 @@ namespace TicTacToe.Test
         public void PlacesOPieceInFirstPositionOnSecondMove()
         {
             _positionOfSavedXPiece = 1;
-            var placePiece = new PlacePiece(this);
-            placePiece.Execute(new PlacePieceRequest {Position = 0, Piece = O});
+            PlacePiece(new PlacePieceRequest {Position = 0, Piece = O});
             Assert.AreEqual(0, _positionOfSavedOPiece);
         }
 
         [Test]
         public void ShouldNotSaveGridIfFirstMoveIsO()
         {
-            var placePiece = new PlacePiece(this);
-            placePiece.Execute(new PlacePieceRequest{Position = 3, Piece = O});
+            PlacePiece(new PlacePieceRequest{Position = 3, Piece = O});
             Assert.IsNull(_positionOfSavedOPiece);
         }
     }
