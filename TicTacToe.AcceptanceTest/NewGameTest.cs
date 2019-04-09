@@ -41,5 +41,10 @@ namespace TicTacToe.AcceptanceTest
         {
             return false;
         }
+
+        public void Save()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

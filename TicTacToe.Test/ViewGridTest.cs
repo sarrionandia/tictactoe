@@ -15,6 +15,11 @@ namespace TicTacToe.Test
             return _positionOfX == i;
         }
 
+        public void Save()
+        {
+            throw new System.NotImplementedException();
+        }
+
         private bool IsXOnlyInPosition(int position, CellValue[] grid)
         {
             bool xIsInPosition = grid[position] == X;
