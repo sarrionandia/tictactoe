@@ -23,7 +23,7 @@ namespace TicTacToe.AcceptanceTest
         }
         
         [Test]
-        public void PlayerSeesTheirPieceOnTheGridAfterPlacingIt()
+        public void PlayerXSeesTheirPieceOnTheGridAfterPlacingIt()
         {
             _positionOfSavedX = null;
             var placePiece = new PlacePiece(this);
@@ -39,6 +39,26 @@ namespace TicTacToe.AcceptanceTest
                 Blank, Blank, Blank
             }, viewGridResponse.Grid);
         }
+        
+                
+        [Test]
+        [Ignore("WIP")]
+        public void PlayerOCanNotGoFirst()
+        {
+            _positionOfSavedX = null;
+            var placePiece = new PlacePiece(this);
+            placePiece.Execute(new PlacePieceRequest { Position = 4, Piece = O });
+            
+            var viewGrid = new ViewGrid(this);
+            ViewGridResponse viewGridResponse = viewGrid.Execute();
+            
+            Assert.AreEqual(new []
+            {
+                Blank, Blank, Blank,
+                Blank, Blank, Blank,
+                Blank, Blank, Blank
+            }, viewGridResponse.Grid);
+        }
 
         public bool IsThereAnXInPosition(int i)
         {
@@ -48,6 +68,11 @@ namespace TicTacToe.AcceptanceTest
         public void SaveXInPosition(int position)
         {
             _positionOfSavedX = position;
+        }
+
+        public void Save(Grid grid)
+        {
+            _positionOfSavedX = grid.PositionOfX;
         }
     }
 }

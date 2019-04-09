@@ -49,5 +49,10 @@ namespace TicTacToe.Test
         {
             _positionOfSavedPiece = position;
         }
+
+        public void Save(Grid grid)
+        {
+            _positionOfSavedPiece = grid.PositionOfX;
+        }
     }
 }

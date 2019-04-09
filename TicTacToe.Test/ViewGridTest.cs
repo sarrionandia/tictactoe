@@ -20,6 +20,11 @@ namespace TicTacToe.Test
             throw new System.NotImplementedException();
         }
 
+        public void Save(Grid grid)
+        {
+            throw new System.NotImplementedException();
+        }
+
         private bool IsXOnlyInPosition(int position, CellValue[] grid)
         {
             bool xIsInPosition = grid[position] == X;

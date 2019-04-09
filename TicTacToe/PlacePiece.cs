@@ -1,3 +1,5 @@
+using System;
+
 namespace TicTacToe
 {
     public class PlacePiece
@@ -13,7 +15,7 @@ namespace TicTacToe
         {
             if (placePieceRequest != null)
             {
-                _persistence.SaveXInPosition(placePieceRequest.Position);
+                _persistence.Save(new Grid { PositionOfX = placePieceRequest.Position});
             }
         }
     }
