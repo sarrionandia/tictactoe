@@ -5,9 +5,12 @@ namespace TicTacToe.AcceptanceTest
 {
     public class NewGameTest : IPersistence
     {
+        private int? _positionOfSavedX;
+
         [Test]
         public void PlayerSeesEmptyGridAtBeginningOfTheGame()
         {
+            _positionOfSavedX = null;
             var viewGrid = new ViewGrid(this);
             ViewGridResponse viewGridResponse = viewGrid.Execute();
             
@@ -20,9 +23,9 @@ namespace TicTacToe.AcceptanceTest
         }
         
         [Test]
-        [Ignore("WIP")]
         public void PlayerSeesTheirPieceOnTheGridAfterPlacingIt()
         {
+            _positionOfSavedX = null;
             var placePiece = new PlacePiece(this);
             placePiece.Execute(new PlacePieceRequest { Position = 4 });
             
@@ -39,12 +42,12 @@ namespace TicTacToe.AcceptanceTest
 
         public bool IsThereAnXInPosition(int i)
         {
-            return false;
+            return _positionOfSavedX == i;
         }
 
         public void SaveXInPosition(int position)
         {
-            throw new System.NotImplementedException();
+            _positionOfSavedX = position;
         }
     }
 }
