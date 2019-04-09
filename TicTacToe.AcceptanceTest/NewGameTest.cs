@@ -58,7 +58,6 @@ namespace TicTacToe.AcceptanceTest
         
                 
         [Test]
-        [Ignore("WIP")]
         public void PlayerOCanNotGoFirst()
         {
             var placePiece = new PlacePiece(this);

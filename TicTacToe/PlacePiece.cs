@@ -1,5 +1,6 @@
 using System;
 using TicTacToe.Boundary;
+using static TicTacToe.Boundary.CellValue;
 
 namespace TicTacToe
 {
@@ -12,12 +13,18 @@ namespace TicTacToe
             _persistence = persistence;
         }
 
-        public void Execute(PlacePieceRequest placePieceRequest)
+        public void Execute(PlacePieceRequest r)
         {
-            if (placePieceRequest != null)
-            {
-                _persistence.Save(new Grid { PositionOfX = placePieceRequest.Position});
-            }
+            if (r == null) return;
+
+            if (r.Piece == O && NobodyHasYetMoved()) return;
+            
+            _persistence.Save(new Grid {PositionOfX = r.Position});
+        }
+
+        private bool NobodyHasYetMoved()
+        {
+            return _persistence.Read().WhoMovedLast() == null;
         }
     }
 }

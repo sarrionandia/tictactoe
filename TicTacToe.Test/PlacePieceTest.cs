@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using TicTacToe.Boundary;
+using static TicTacToe.Boundary.CellValue;
 
 namespace TicTacToe.Test
 {
@@ -39,6 +40,15 @@ namespace TicTacToe.Test
             placePiece.Execute(new PlacePieceRequest() {Position = position});
             
             Assert.AreEqual(position, _positionOfSavedPiece);
+        }
+
+        [Test]
+        public void ShouldNotSaveGridIfFirstMoveIsO()
+        {
+            _positionOfSavedPiece = null;
+            var placePiece = new PlacePiece(this);
+            placePiece.Execute(new PlacePieceRequest{Position = 3, Piece = O});
+            Assert.IsNull(_positionOfSavedPiece);
         }
 
         public Grid Read()
