@@ -4,12 +4,12 @@ namespace TicTacToe.Test
 {
     public class PlacePieceTest : IPersistence
     {
-        private bool _called;
+        private int? _positionOfSavedPiece;
 
         [SetUp]
         public void SetUp()
         {
-            _called = false;
+            _positionOfSavedPiece = null;
         }
         
         [Test]
@@ -18,7 +18,17 @@ namespace TicTacToe.Test
             var placePiece = new PlacePiece(this);
             placePiece.Execute(null);
             
-            Assert.IsFalse(_called);
+            Assert.IsNull(_positionOfSavedPiece);
+        }
+
+        [Test]
+        public void PlacesPieceWhenCalled()
+        {
+            var placePiece = new PlacePiece(this);
+            placePiece.Execute(new PlacePieceRequest() {Position = 0});
+            
+            Assert.AreEqual(0, _positionOfSavedPiece);
+            
         }
         
         public bool IsThereAnXInPosition(int i)
@@ -26,9 +36,9 @@ namespace TicTacToe.Test
             throw new System.NotImplementedException();
         }
 
-        public void Save()
+        public void SaveXInPosition(int position)
         {
-            
+            _positionOfSavedPiece = position;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace TicTacToe.AcceptanceTest
             return false;
         }
 
-        public void Save()
+        public void SaveXInPosition(int position)
         {
             throw new System.NotImplementedException();
         }

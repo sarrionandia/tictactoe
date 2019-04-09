@@ -4,6 +4,6 @@ namespace TicTacToe
     {
         bool IsThereAnXInPosition(int i);
 
-        void Save();
+        void SaveXInPosition(int position);
     }
 }

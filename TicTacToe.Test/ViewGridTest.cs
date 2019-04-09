@@ -15,7 +15,7 @@ namespace TicTacToe.Test
             return _positionOfX == i;
         }
 
-        public void Save()
+        public void SaveXInPosition(int position)
         {
             throw new System.NotImplementedException();
         }
