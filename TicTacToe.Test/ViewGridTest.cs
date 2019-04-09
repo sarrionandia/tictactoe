@@ -19,7 +19,7 @@ namespace TicTacToe.Test
 
         private int NumberOfPiecesInGrid(CellValue piece, CellValue[] grid)
         {
-            return grid.Where((value => value == piece)).ToImmutableList().Count();
+            return grid.Where(value => value == piece).ToImmutableList().Count;
         }
 
         private bool IsXOnlyInPosition(int position, CellValue[] grid)
@@ -37,7 +37,6 @@ namespace TicTacToe.Test
 
             return oIsInPosition && onlyOneO;
         }
-
 
         [Test]
         public void CanViewEmptyGrid()
