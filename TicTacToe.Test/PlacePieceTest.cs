@@ -8,18 +8,28 @@ namespace TicTacToe.Test
     {
         private int? _positionOfSavedXPiece;
         private int? _positionOfSavedOPiece;
+        
+        public Grid Read()
+        {
+            return new Grid {PositionOfX = _positionOfSavedXPiece};
+        }
 
+        public void Save(Grid grid)
+        {
+            _positionOfSavedXPiece = grid.PositionOfX;
+            _positionOfSavedOPiece = grid.PositionOfO;
+        }
+        
         [SetUp]
         public void SetUp()
         {
             _positionOfSavedXPiece = null;
+            _positionOfSavedOPiece = null;
         }
         
         [Test]
         public void DoesNotPlaceGivenNullRequest()
         {
-            _positionOfSavedXPiece = null;
-            _positionOfSavedOPiece = null;
             var placePiece = new PlacePiece(this);
             placePiece.Execute(null);
             
@@ -39,8 +49,6 @@ namespace TicTacToe.Test
         [TestCase(9)]
         public void PlacesXPieceInAnyPosition(int position)
         {
-            _positionOfSavedXPiece = null;
-            _positionOfSavedOPiece = null;
             var placePiece = new PlacePiece(this);
             placePiece.Execute(new PlacePieceRequest() {Position = position, Piece = X});
             
@@ -52,7 +60,6 @@ namespace TicTacToe.Test
         public void PlacesOPieceInFirstPositionOnSecondMove()
         {
             _positionOfSavedXPiece = 1;
-            _positionOfSavedOPiece = null;
             var placePiece = new PlacePiece(this);
             placePiece.Execute(new PlacePieceRequest {Position = 0, Piece = O});
             Assert.AreEqual(0, _positionOfSavedOPiece);
@@ -61,22 +68,9 @@ namespace TicTacToe.Test
         [Test]
         public void ShouldNotSaveGridIfFirstMoveIsO()
         {
-            _positionOfSavedXPiece = null;
-            _positionOfSavedOPiece = null;
             var placePiece = new PlacePiece(this);
             placePiece.Execute(new PlacePieceRequest{Position = 3, Piece = O});
             Assert.IsNull(_positionOfSavedOPiece);
-        }
-
-        public Grid Read()
-        {
-            return new Grid {PositionOfX = _positionOfSavedXPiece};
-        }
-
-        public void Save(Grid grid)
-        {
-            _positionOfSavedXPiece = grid.PositionOfX;
-            _positionOfSavedOPiece = grid.PositionOfO;
         }
     }
 }
