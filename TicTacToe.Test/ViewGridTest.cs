@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using System.Linq;
 using NUnit.Framework;
+using static TicTacToe.ViewGridResponse;
 using static TicTacToe.ViewGridResponse.CellValue;
 
 namespace TicTacToe.Test
@@ -14,7 +15,7 @@ namespace TicTacToe.Test
             return _positionOfX == i;
         }
 
-        public bool IsXOnlyInPosition(int position, ViewGridResponse.CellValue[] grid)
+        private bool IsXOnlyInPosition(int position, CellValue[] grid)
         {
             bool xIsInPosition = grid[position] == X;
 
