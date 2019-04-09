@@ -19,16 +19,14 @@ namespace TicTacToe
                 Blank, Blank, Blank,
                 Blank, Blank, Blank
             };
-            
-            if (_persistence.IsThereAnXInPosition(0)) cellValues[0] = X;
-            if (_persistence.IsThereAnXInPosition(1)) cellValues[1] = X;
-            if (_persistence.IsThereAnXInPosition(2)) cellValues[2] = X;
-            if (_persistence.IsThereAnXInPosition(3)) cellValues[3] = X;
-            if (_persistence.IsThereAnXInPosition(4)) cellValues[4] = X;
-            if (_persistence.IsThereAnXInPosition(5)) cellValues[5] = X;
-            if (_persistence.IsThereAnXInPosition(6)) cellValues[6] = X;
-            if (_persistence.IsThereAnXInPosition(7)) cellValues[7] = X;
-            if (_persistence.IsThereAnXInPosition(8)) cellValues[8] = X;
+
+            for (int i = 0; i < cellValues.Length; i++)
+            {
+                if (_persistence.IsThereAnXInPosition(i))
+                {
+                    cellValues[i] = X;
+                }
+            }
             
             return new ViewGridResponse
             {
