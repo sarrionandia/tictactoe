@@ -22,13 +22,15 @@ namespace TicTacToe
 
             if (r.Position == existingGrid.PositionOfX) return;
             
+            if ((r.Piece == X) && (existingGrid.WhoMovedLast() == Grid.Player.PlayerX)) return;
+            
             var builder = new GridBuilder(existingGrid);
             _persistence.Save(builder.UpdatedForRequest(r).Build());
         }
 
         private bool NobodyHasYetMoved()
         {
-            return _persistence.Read().WhoMovedLast() == null;
+            return _persistence.Read().WhoMovedLast() == Grid.Player.Nobody;
         }
     }
         

@@ -7,14 +7,20 @@ namespace TicTacToe
         public int? PositionOfX { get; set; }
         public int? PositionOfO { get; set; }
 
+        public enum Player
+        {
+            PlayerX,
+            Nobody
+        }
+        
         public bool IsThereAnXInPosition(int position)
         {
             return PositionOfX == position;
         }
 
-        public Object WhoMovedLast()
+        public Player WhoMovedLast()
         {
-            return PositionOfX;
+            return PositionOfX != null ? Player.PlayerX : Player.Nobody;
         }
 
         public bool IsThereAnOInPosition(int position)

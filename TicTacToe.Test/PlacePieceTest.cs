@@ -93,5 +93,13 @@ namespace TicTacToe.Test
             Assert.IsNull(_positionOfSavedOPiece);
             Assert.AreEqual(_positionOfSavedXPiece, 2);
         }
+
+        [Test]
+        public void ShouldNotLetXPlayTheSecondMove()
+        {
+            _positionOfSavedXPiece = 2;
+            PlacePiece(new PlacePieceRequest{Position = 5, Piece = X});
+            Assert.AreEqual(_positionOfSavedXPiece, 2);
+        }
     }
 }

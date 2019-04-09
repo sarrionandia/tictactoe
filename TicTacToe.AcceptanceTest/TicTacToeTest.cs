@@ -56,6 +56,21 @@ namespace TicTacToe.AcceptanceTest
             }, viewGridResponse.Grid);
         }
 
+        [Test]
+        public void PlayerXCanNotGoTwice()
+        {
+            _placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = X});
+            _placePiece.Execute(new PlacePieceRequest {Position = 5, Piece = X});
+
+            ViewGridResponse viewGridResponse = _viewGrid.Execute();
+
+            Assert.AreEqual(new[]
+            {
+                Blank, Blank, Blank,
+                Blank, X, Blank,
+                Blank, Blank, Blank
+            }, viewGridResponse.Grid);
+        }
 
         [Test]
         public void PlayerOCanNotGoFirst()
