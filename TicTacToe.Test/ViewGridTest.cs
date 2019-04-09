@@ -29,12 +29,25 @@ namespace TicTacToe.Test
             return xIsInPosition && everythingElseIsBlank;
         }
 
+        private bool IsOOnlyInPosition(int position, CellValue[] grid)
+        {
+            bool oIsInPosition = grid[position] == O;
+
+            var allOs = grid
+                .Where(value => value == O)
+                .ToImmutableList();
+            bool onlyOneO = allOs.Count == 1;
+
+            return oIsInPosition && onlyOneO;
+        }
+
+
         [Test]
         public void CanViewEmptyGrid()
         {
             _positionOfX = null;
             _positionOfO = null;
-            
+
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
             Assert.AreEqual(new[]
@@ -66,18 +79,23 @@ namespace TicTacToe.Test
         }
 
         [Test]
-        public void CanViewAGridWithAnOPiecePlacedInTheTopLeft()
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        [TestCase(6)]
+        [TestCase(7)]
+        [TestCase(8)]
+        public void CanViewAGridWithAnOPiecePlacedAnywhere(int position)
         {
             _positionOfX = 7;
-            _positionOfO = 8;
-            
+            _positionOfO = position;
+
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
-            Assert.AreEqual(new[]
-            {
-                Blank, Blank, Blank,
-                Blank, Blank, Blank,
-                Blank, X, O
-            }, viewGridResponse.Grid);        }
+            Assert.IsTrue(IsOOnlyInPosition(position, viewGridResponse.Grid));
+        }
     }
 }
