@@ -22,13 +22,22 @@ namespace TicTacToe.Test
         }
 
         [Test]
-        public void PlacesPieceWhenCalled()
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        [TestCase(6)]
+        [TestCase(7)]
+        [TestCase(8)]
+        [TestCase(9)]
+        public void PlacesPieceInAnyPosition(int position)
         {
             var placePiece = new PlacePiece(this);
-            placePiece.Execute(new PlacePieceRequest() {Position = 0});
+            placePiece.Execute(new PlacePieceRequest() {Position = position});
             
-            Assert.AreEqual(0, _positionOfSavedPiece);
-            
+            Assert.AreEqual(position, _positionOfSavedPiece);
         }
         
         public bool IsThereAnXInPosition(int i)
