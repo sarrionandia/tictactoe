@@ -17,14 +17,15 @@ namespace TicTacToe.Test
             return new Grid {PositionOfX = _positionOfX, PositionOfO = _positionOfO};
         }
 
+        private int numberOfPiecesInGrid(CellValue piece, CellValue[] grid)
+        {
+            return grid.Where((value => value == piece)).ToImmutableList().Count();
+        }
+
         private bool IsXOnlyInPosition(int position, CellValue[] grid)
         {
             bool xIsInPosition = grid[position] == X;
-
-            var onlyTheBlanks = grid
-                .Where(value => value == Blank)
-                .ToImmutableList();
-            bool everythingElseIsBlank = onlyTheBlanks.Count == 8;
+            bool everythingElseIsBlank = numberOfPiecesInGrid(Blank, grid) == 8;
 
             return xIsInPosition && everythingElseIsBlank;
         }
@@ -32,11 +33,7 @@ namespace TicTacToe.Test
         private bool IsOOnlyInPosition(int position, CellValue[] grid)
         {
             bool oIsInPosition = grid[position] == O;
-
-            var allOs = grid
-                .Where(value => value == O)
-                .ToImmutableList();
-            bool onlyOneO = allOs.Count == 1;
+            bool onlyOneO = numberOfPiecesInGrid(O, grid) == 1;
 
             return oIsInPosition && onlyOneO;
         }
