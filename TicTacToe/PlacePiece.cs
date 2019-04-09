@@ -16,21 +16,20 @@ namespace TicTacToe
         public void Execute(PlacePieceRequest r)
         {
             if (r == null) return;
-            if (r.Piece == O && NobodyHasYetMoved()) return;
-
             var existingGrid = _persistence.Read();
+            
+            switch (r.Piece)
+            {
+                case PlacePieceRequest.Move.O when existingGrid.WhoMovedLast() == Grid.Player.Nobody:
+                case PlacePieceRequest.Move.X when existingGrid.WhoMovedLast() == Grid.Player.PlayerX:
+                    return;
+            }
 
             if (r.Position == existingGrid.PositionOfX) return;
             
-            if ((r.Piece == X) && (existingGrid.WhoMovedLast() == Grid.Player.PlayerX)) return;
             
             var builder = new GridBuilder(existingGrid);
             _persistence.Save(builder.UpdatedForRequest(r).Build());
-        }
-
-        private bool NobodyHasYetMoved()
-        {
-            return _persistence.Read().WhoMovedLast() == Grid.Player.Nobody;
         }
     }
         
@@ -38,7 +37,7 @@ namespace TicTacToe
     {
         public static GridBuilder UpdatedForRequest(this GridBuilder builder, PlacePieceRequest r)
         {
-            if (r.Piece == X)
+            if (r.Piece == PlacePieceRequest.Move.X)
                 builder.WithXAt(r.Position);
             else
                 builder.WithOAt(r.Position);

@@ -9,6 +9,9 @@ namespace TicTacToe.AcceptanceTest
         private Grid _grid;
         private PlacePiece _placePiece;
         private ViewGrid _viewGrid;
+        
+        private readonly PlacePieceRequest.Move _moveX = PlacePieceRequest.Move.X;
+        private readonly PlacePieceRequest.Move _moveO = PlacePieceRequest.Move.O;
 
         public Grid Read()
         {
@@ -44,7 +47,7 @@ namespace TicTacToe.AcceptanceTest
         [Test]
         public void PlayerXSeesTheirPieceOnTheGridAfterPlacingIt()
         {
-            _placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = X});
+            _placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = _moveX});
 
             ViewGridResponse viewGridResponse = _viewGrid.Execute();
 
@@ -59,15 +62,15 @@ namespace TicTacToe.AcceptanceTest
         [Test]
         public void PlayerXCanNotGoTwice()
         {
-            _placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = X});
-            _placePiece.Execute(new PlacePieceRequest {Position = 5, Piece = X});
+            _placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = _moveX});
+            _placePiece.Execute(new PlacePieceRequest {Position = 5, Piece = _moveX});
 
             ViewGridResponse viewGridResponse = _viewGrid.Execute();
 
             Assert.AreEqual(new[]
             {
                 Blank, Blank, Blank,
-                Blank, X, Blank,
+                Blank, X,Blank,
                 Blank, Blank, Blank
             }, viewGridResponse.Grid);
         }
@@ -75,7 +78,7 @@ namespace TicTacToe.AcceptanceTest
         [Test]
         public void PlayerOCanNotGoFirst()
         {
-            _placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = O});
+            _placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = _moveO});
 
             ViewGridResponse viewGridResponse = _viewGrid.Execute();
 
@@ -90,8 +93,8 @@ namespace TicTacToe.AcceptanceTest
         [Test]
         public void PlayerOCanGoSecond()
         {
-            _placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = X});
-            _placePiece.Execute(new PlacePieceRequest {Position = 5, Piece = O});
+            _placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = _moveX});
+            _placePiece.Execute(new PlacePieceRequest {Position = 5, Piece = _moveO});
 
             ViewGridResponse viewGridResponse = _viewGrid.Execute();
 
@@ -106,8 +109,8 @@ namespace TicTacToe.AcceptanceTest
         [Test]
         public void PlayerOCantPlacePieceOnTopOfX()
         {
-            _placePiece.Execute(new PlacePieceRequest {Position = 6, Piece = X});
-            _placePiece.Execute(new PlacePieceRequest {Position = 6, Piece = O});
+            _placePiece.Execute(new PlacePieceRequest {Position = 6, Piece = _moveX});
+            _placePiece.Execute(new PlacePieceRequest {Position = 6, Piece = _moveO});
 
             ViewGridResponse viewGridResponse = _viewGrid.Execute();
 

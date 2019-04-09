@@ -1,6 +1,6 @@
 using NUnit.Framework;
 using TicTacToe.Boundary;
-using static TicTacToe.Boundary.CellValue;
+using static TicTacToe.Boundary.PlacePieceRequest.Move;
 
 namespace TicTacToe.Test
 {

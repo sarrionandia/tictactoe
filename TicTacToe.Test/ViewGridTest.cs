@@ -2,7 +2,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using NUnit.Framework;
 using TicTacToe.Boundary;
-using static TicTacToe.Boundary.ViewGridResponse;
 using static TicTacToe.Boundary.CellValue;
 
 namespace TicTacToe.Test
