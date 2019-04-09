@@ -45,11 +45,6 @@ namespace TicTacToe.Test
             throw new System.NotImplementedException();
         }
 
-        public void SaveXInPosition(int position)
-        {
-            _positionOfSavedPiece = position;
-        }
-
         public void Save(Grid grid)
         {
             _positionOfSavedPiece = grid.PositionOfX;
