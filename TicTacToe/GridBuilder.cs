@@ -11,9 +11,7 @@ namespace TicTacToe
         [Obsolete]
         public GridBuilder(Grid existingGrid) : this()
         {
-            if (existingGrid.Pieces != null) _pieces = existingGrid.Pieces.ToArray();
-            if (existingGrid.PositionOfO != null) WithOAt(existingGrid.PositionOfO ?? 0);
-            if (existingGrid.PositionOfX != null) WithXAt(existingGrid.PositionOfX ?? 0);
+            _pieces = existingGrid.Pieces.ToArray();
         }
 
         public GridBuilder()

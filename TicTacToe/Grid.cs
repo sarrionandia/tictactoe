@@ -5,8 +5,6 @@ namespace TicTacToe
 {
     public class Grid
     {
-        public int? PositionOfX { get; set; }
-        public int? PositionOfO { get; set; }
         public PieceType[] Pieces { get; set; }
 
         public enum Player
@@ -24,14 +22,12 @@ namespace TicTacToe
         
         public bool IsThereAnXInPosition(int position)
         {
-            if (Pieces != null) return Pieces[position] == PieceType.X;
-            return PositionOfX == position;
+            return Pieces[position] == PieceType.X;
         }
 
         public bool IsThereAnOInPosition(int position)
         {
-            if (Pieces != null) return Pieces[position] == PieceType.O;
-            return PositionOfO == position;
+            return Pieces[position] == PieceType.O;
         }
 
         public Player WhoMovedLast()

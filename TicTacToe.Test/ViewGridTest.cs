@@ -14,7 +14,10 @@ namespace TicTacToe.Test
 
         public Grid Read()
         {
-            return _grid ?? new Grid {PositionOfX = _positionOfX, PositionOfO = _positionOfO};
+            var build = new GridBuilder();
+            if (_positionOfO != null) build.WithOAt(_positionOfO ?? 0);
+            if (_positionOfX != null) build.WithXAt(_positionOfX ?? 0);
+            return _grid ?? build.Build();
         }
 
         private int NumberOfPiecesInGrid(CellValue piece, CellValue[] grid)
@@ -88,9 +91,8 @@ namespace TicTacToe.Test
         [TestCase(4)]
         [TestCase(5)]
         [TestCase(6)]
-        [TestCase(7)]
         [TestCase(8)]
-        public void CanViewAGridWithAnOPiecePlacedAnywhere(int position)
+        public void CanViewAGridWithAnOPiecePlacedAnywhereBlank(int position)
         {
             _positionOfX = 7;
             _positionOfO = position;
