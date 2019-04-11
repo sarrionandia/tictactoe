@@ -22,16 +22,16 @@ namespace TicTacToe.Test
 
         private bool IsXOnlyInPosition(int position, CellValue[] grid)
         {
-            bool xIsInPosition = grid[position] == X;
-            bool everythingElseIsBlank = NumberOfPiecesInGrid(Blank, grid) == 8;
+            var xIsInPosition = grid[position] == X;
+            var everythingElseIsBlank = NumberOfPiecesInGrid(Blank, grid) == 8;
 
             return xIsInPosition && everythingElseIsBlank;
         }
 
         private bool IsOOnlyInPosition(int position, CellValue[] grid)
         {
-            bool oIsInPosition = grid[position] == O;
-            bool onlyOneO = NumberOfPiecesInGrid(O, grid) == 1;
+            var oIsInPosition = grid[position] == O;
+            var onlyOneO = NumberOfPiecesInGrid(O, grid) == 1;
 
             return oIsInPosition && onlyOneO;
         }
