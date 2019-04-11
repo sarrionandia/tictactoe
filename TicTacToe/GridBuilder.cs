@@ -6,11 +6,8 @@ namespace TicTacToe
 {
     public class GridBuilder
     {
-        [Obsolete] private int? _xPosition;
-        [Obsolete] private int? _oPosition;
-
         private Grid.PieceType[] _pieces;
-        
+
         [Obsolete]
         public GridBuilder(Grid existingGrid) : this()
         {
@@ -26,25 +23,22 @@ namespace TicTacToe
                 Blank, Blank, Blank,
                 Blank, Blank, Blank,
                 Blank, Blank, Blank
-            };    
+            };
         }
 
         public Grid Build()
         {
-                return new Grid { Pieces = _pieces };
-            
+            return new Grid {Pieces = _pieces};
         }
 
         public GridBuilder WithXAt(int rPosition)
         {
-            _xPosition = rPosition;
             _pieces[rPosition] = X;
             return this;
         }
 
         public GridBuilder WithOAt(int rPosition)
         {
-            _oPosition = rPosition;
             _pieces[rPosition] = O;
             return this;
         }
