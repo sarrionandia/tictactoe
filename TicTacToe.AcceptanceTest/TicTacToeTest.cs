@@ -121,5 +121,24 @@ namespace TicTacToe.AcceptanceTest
                 X, Blank, Blank
             }, viewGridResponse.Grid);
         }
+
+        [Test]
+        [Ignore("WIP")]
+        public void PlayerXCanPlaceSecondPiece()
+        {
+            _placePiece.Execute(new PlacePieceRequest {Position = 6, Piece = _moveX});
+            _placePiece.Execute(new PlacePieceRequest {Position = 3, Piece = _moveO});
+            _placePiece.Execute(new PlacePieceRequest {Position = 4, Piece = _moveX});
+
+            var viewGridResponse = _viewGrid.Execute();
+
+            Assert.AreEqual(new[]
+            {
+                Blank, Blank, Blank,
+                O, X, Blank,
+                X, Blank, Blank
+            }, viewGridResponse.Grid);
+
+        }
     }
 }

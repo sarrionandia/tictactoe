@@ -10,10 +10,11 @@ namespace TicTacToe.Test
     {
         private int? _positionOfX;
         private int? _positionOfO;
+        private Grid _grid;
 
         public Grid Read()
         {
-            return new Grid {PositionOfX = _positionOfX, PositionOfO = _positionOfO};
+            return _grid ?? new Grid {PositionOfX = _positionOfX, PositionOfO = _positionOfO};
         }
 
         private int NumberOfPiecesInGrid(CellValue piece, CellValue[] grid)
@@ -35,6 +36,12 @@ namespace TicTacToe.Test
             bool onlyOneO = NumberOfPiecesInGrid(O, grid) == 1;
 
             return oIsInPosition && onlyOneO;
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            _grid = null;
         }
 
         [Test]
@@ -91,6 +98,25 @@ namespace TicTacToe.Test
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
             Assert.IsTrue(IsOOnlyInPosition(position, viewGridResponse.Grid));
+        }
+
+        [Test]
+        public void CanViewAGridWithMultipleXPieces()
+        {
+            _grid = new GridBuilder()
+                .WithOAt(7)
+                .WithXAt(6)
+                .WithXAt(8)
+                .Build();
+            
+            var viewGrid = new ViewGrid(this);
+            var viewGridResponse = viewGrid.Execute();
+            Assert.AreEqual(new[]
+            {
+                Blank, Blank, Blank,
+                Blank, Blank, Blank,
+                X, O, X
+            }, viewGridResponse.Grid);
         }
     }
 }
