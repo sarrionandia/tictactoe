@@ -104,5 +104,18 @@ namespace TicTacToe.Test
             PlacePiece(new PlacePieceRequest{Position = 5, Piece = X});
             Assert.IsNull(_grid);
         }
+
+        [Test]
+        public void ShouldLetXPlayAfterO()
+        {
+            _grid = new GridBuilder()
+                .WithXAt(1)
+                .WithOAt(2)
+                .Build();
+            
+            PlacePiece(new PlacePieceRequest{Position = 3, Piece = X});
+            
+            Assert.AreEqual(Grid.PieceType.X, _grid.Pieces[3]);
+        }
     }
 }

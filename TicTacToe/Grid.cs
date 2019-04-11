@@ -10,6 +10,7 @@ namespace TicTacToe
         public enum Player
         {
             PlayerX,
+            PlayerO,
             Nobody
         }
 
@@ -32,13 +33,16 @@ namespace TicTacToe
 
         public Player WhoMovedLast()
         {
-            var numberOfXs = Pieces
-                .Where(type => type == PieceType.X)
+            var numberOfMoves = Pieces
+                .Where(type => type != PieceType.Blank)
                 .ToArray()
                 .Length;
-            var isXsTurn = numberOfXs % 2 != 0;
+
+            if (numberOfMoves == 0) return Player.Nobody;
             
-            return isXsTurn ? Player.PlayerX : Player.Nobody;
+            var xMovedLast = numberOfMoves % 2 != 0;
+            
+            return xMovedLast ? Player.PlayerX : Player.PlayerO;
         }
     }
 }

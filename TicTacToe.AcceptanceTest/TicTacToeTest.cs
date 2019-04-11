@@ -123,7 +123,6 @@ namespace TicTacToe.AcceptanceTest
         }
 
         [Test]
-        [Ignore("WIP")]
         public void PlayerXCanPlaceSecondPiece()
         {
             _placePiece.Execute(new PlacePieceRequest {Position = 6, Piece = _moveX});
