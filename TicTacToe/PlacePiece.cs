@@ -15,18 +15,17 @@ namespace TicTacToe
 
         public void Execute(PlacePieceRequest r)
         {
-            if (r == null) return;
             var existingGrid = _persistence.Read();
             
-            switch (r.Piece)
+            switch (r?.Piece)
             {
+                case null:
                 case PlacePieceRequest.Move.O when existingGrid.WhoMovedLast() == Grid.Player.Nobody:
                 case PlacePieceRequest.Move.X when existingGrid.WhoMovedLast() == Grid.Player.PlayerX:
                     return;
             }
 
             if (r.Position == existingGrid.PositionOfX) return;
-            
             
             var builder = new GridBuilder(existingGrid);
             _persistence.Save(builder.UpdatedForRequest(r).Build());
