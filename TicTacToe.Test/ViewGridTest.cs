@@ -8,16 +8,11 @@ namespace TicTacToe.Test
 {
     public class ViewGridTest : IGridReader
     {
-        private int? _positionOfX;
-        private int? _positionOfO;
         private Grid _grid;
 
         public Grid Read()
         {
-            var build = new GridBuilder();
-            if (_positionOfO != null) build.WithOAt(_positionOfO ?? 0);
-            if (_positionOfX != null) build.WithXAt(_positionOfX ?? 0);
-            return _grid ?? build.Build();
+            return _grid;
         }
 
         private int NumberOfPiecesInGrid(CellValue piece, CellValue[] grid)
@@ -50,8 +45,7 @@ namespace TicTacToe.Test
         [Test]
         public void CanViewEmptyGrid()
         {
-            _positionOfX = null;
-            _positionOfO = null;
+            _grid = new GridBuilder().Build();
 
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
@@ -75,8 +69,9 @@ namespace TicTacToe.Test
         [TestCase(8)]
         public void CanViewAGridWithPiecePlacedAnywhere(int position)
         {
-            _positionOfX = position;
-            _positionOfO = null;
+            _grid = new GridBuilder()
+                .WithXAt(position)
+                .Build();
 
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
@@ -94,8 +89,10 @@ namespace TicTacToe.Test
         [TestCase(8)]
         public void CanViewAGridWithAnOPiecePlacedAnywhereBlank(int position)
         {
-            _positionOfX = 7;
-            _positionOfO = position;
+            _grid = new GridBuilder()
+                .WithXAt(7)
+                .WithOAt(position)
+                .Build();
 
             var viewGrid = new ViewGrid(this);
             var viewGridResponse = viewGrid.Execute();
