@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using static TicTacToe.Grid.PieceType;
 
 namespace TicTacToe
@@ -11,10 +12,11 @@ namespace TicTacToe
         private Grid.PieceType[] _pieces;
         
         [Obsolete]
-        public GridBuilder(Grid existingGrid)
+        public GridBuilder(Grid existingGrid) : this()
         {
-            _oPosition = existingGrid.PositionOfO;
-            _xPosition = existingGrid.PositionOfX;
+            if (existingGrid.Pieces != null) _pieces = existingGrid.Pieces.ToArray();
+            if (existingGrid.PositionOfO != null) WithOAt(existingGrid.PositionOfO ?? 0);
+            if (existingGrid.PositionOfX != null) WithXAt(existingGrid.PositionOfX ?? 0);
         }
 
         public GridBuilder()
@@ -29,25 +31,21 @@ namespace TicTacToe
 
         public Grid Build()
         {
-            if (_pieces != null)
-            {
                 return new Grid { Pieces = _pieces };
-            }
             
-            return new Grid {PositionOfX = _xPosition, PositionOfO = _oPosition};
         }
 
         public GridBuilder WithXAt(int rPosition)
         {
             _xPosition = rPosition;
-            if(_pieces != null) _pieces[rPosition] = X;
+            _pieces[rPosition] = X;
             return this;
         }
 
         public GridBuilder WithOAt(int rPosition)
         {
             _oPosition = rPosition;
-            if(_pieces != null) _pieces[rPosition] = O;
+            _pieces[rPosition] = O;
             return this;
         }
     }

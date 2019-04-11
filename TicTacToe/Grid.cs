@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace TicTacToe
 {
@@ -35,7 +36,13 @@ namespace TicTacToe
 
         public Player WhoMovedLast()
         {
-            return PositionOfX != null ? Player.PlayerX : Player.Nobody;
+            var numberOfXs = Pieces
+                .Where(type => type == PieceType.X)
+                .ToArray()
+                .Length;
+            var isXsTurn = numberOfXs % 2 != 0;
+            
+            return isXsTurn ? Player.PlayerX : Player.Nobody;
         }
     }
 }

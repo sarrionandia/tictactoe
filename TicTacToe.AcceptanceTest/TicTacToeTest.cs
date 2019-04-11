@@ -28,7 +28,7 @@ namespace TicTacToe.AcceptanceTest
         {
             _placePiece = new PlacePiece(this);
             _viewGrid = new ViewGrid(this);
-            _grid = new Grid();
+            _grid = new GridBuilder().Build();
         }
 
         [Test]

@@ -25,7 +25,7 @@ namespace TicTacToe
                     return;
             }
 
-            if (r.Position == existingGrid.PositionOfX) return;
+            if (Grid.PieceType.Blank != existingGrid.Pieces[r.Position]) return;
             
             var builder = new GridBuilder(existingGrid);
             _persistence.Save(builder.UpdatedForRequest(r).Build());
