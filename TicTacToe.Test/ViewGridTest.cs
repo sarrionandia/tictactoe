@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using NUnit.Framework;
@@ -15,12 +16,12 @@ namespace TicTacToe.Test
             return _grid;
         }
 
-        private int NumberOfPiecesInGrid(CellValue piece, CellValue[] grid)
+        private static int NumberOfPiecesInGrid(CellValue piece, IEnumerable<CellValue> grid)
         {
             return grid.Where(value => value == piece).ToImmutableList().Count;
         }
 
-        private bool IsXOnlyInPosition(int position, CellValue[] grid)
+        private static bool IsXOnlyInPosition(int position, IReadOnlyList<CellValue> grid)
         {
             var xIsInPosition = grid[position] == X;
             var everythingElseIsBlank = NumberOfPiecesInGrid(Blank, grid) == 8;
@@ -28,7 +29,7 @@ namespace TicTacToe.Test
             return xIsInPosition && everythingElseIsBlank;
         }
 
-        private bool IsOOnlyInPosition(int position, CellValue[] grid)
+        private static bool IsOOnlyInPosition(int position, IReadOnlyList<CellValue> grid)
         {
             var oIsInPosition = grid[position] == O;
             var onlyOneO = NumberOfPiecesInGrid(O, grid) == 1;
