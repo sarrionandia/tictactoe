@@ -36,6 +36,8 @@ namespace TicTacToe.Test
 
             return oIsInPosition && onlyOneO;
         }
+        
+        private ViewGridResponse ViewGrid() => new ViewGrid(this).Execute();
 
         [SetUp]
         public void SetUp()
@@ -48,14 +50,14 @@ namespace TicTacToe.Test
         {
             _grid = new GridBuilder().Build();
 
-            var viewGrid = new ViewGrid(this);
-            var viewGridResponse = viewGrid.Execute();
+            var response = ViewGrid();
+
             Assert.AreEqual(new[]
             {
                 Blank, Blank, Blank,
                 Blank, Blank, Blank,
                 Blank, Blank, Blank
-            }, viewGridResponse.Grid);
+            }, response.Grid);
         }
 
         [Test]
@@ -74,9 +76,9 @@ namespace TicTacToe.Test
                 .WithXAt(position)
                 .Build();
 
-            var viewGrid = new ViewGrid(this);
-            var viewGridResponse = viewGrid.Execute();
-            Assert.IsTrue(IsXOnlyInPosition(position, viewGridResponse.Grid));
+            var response = ViewGrid();
+            
+            Assert.IsTrue(IsXOnlyInPosition(position, response.Grid));
         }
 
         [Test]
@@ -95,9 +97,9 @@ namespace TicTacToe.Test
                 .WithOAt(position)
                 .Build();
 
-            var viewGrid = new ViewGrid(this);
-            var viewGridResponse = viewGrid.Execute();
-            Assert.IsTrue(IsOOnlyInPosition(position, viewGridResponse.Grid));
+            var response = ViewGrid();
+
+            Assert.IsTrue(IsOOnlyInPosition(position, response.Grid));
         }
 
         [Test]
@@ -109,14 +111,14 @@ namespace TicTacToe.Test
                 .WithXAt(8)
                 .Build();
             
-            var viewGrid = new ViewGrid(this);
-            var viewGridResponse = viewGrid.Execute();
+            var response = ViewGrid();
+
             Assert.AreEqual(new[]
             {
                 Blank, Blank, Blank,
                 Blank, Blank, Blank,
                 X, O, X
-            }, viewGridResponse.Grid);
+            }, response.Grid);
         }
     }
 }
